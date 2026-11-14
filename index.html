@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>TDFlow Pro</title>
+<style>
+:root { --ink: #17140f; --cream: #efe6d8; --gold: #ffc428; }
+body { margin: 0; background: #0a0a0a; color: var(--cream); font-family: sans-serif; height: 100vh; overflow: hidden; }
+#app { display: flex; flex-direction: column; height: 100vh; }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px; overflow-y: auto; flex: 1; }
+.media-item { aspect-ratio: 1; background: #333; border-radius: 6px; position: relative; }
+.media-item.selected { border: 3px solid var(--gold); opacity: 0.7; }
+.sheet-header { position: sticky; top: 0; background: #17140f; padding: 15px; z-index: 10; text-align: center; font-weight: bold; }
+.footer-action { position: sticky; bottom: 0; padding: 15px; background: var(--gold); color: var(--ink); text-align: center; font-weight: bold; border-radius: 12px 12px 0 0; }
+</style>
+</head>
+<body>
+<div id="app">
+    <div class="sheet-header">PHOTOS / VIDÉOS</div>
+    <div class="gallery-grid" id="grid"></div>
+    <div class="footer-action" id="btn-add">AJOUTER LA SÉLECTION (0)</div>
+</div>
+<script>
+const grid = document.getElementById('grid');
+for(let i=0; i<100; i++){
+    const div = document.createElement('div');
+    div.className = 'media-item';
+    div.onclick = () => {
+        div.classList.toggle('selected');
+        const count = document.querySelectorAll('.selected').length;
+        document.getElementById('btn-add').textContent = `AJOUTER LA SÉLECTION (${count})`;
+    };
+    grid.appendChild(div);
+}
+</script>
+</body>
+</html>
